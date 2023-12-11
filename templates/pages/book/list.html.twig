@@ -1,78 +1,77 @@
 {% extends 'layouts/layout.html.twig' %}
 
-{% block title %}List Book{% endblock %}
+{% block title %}Book List{% endblock %}
 
 {% block content %}
-        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-            <div class="rounded-t mb-0 px-4 py-3 border-0">
-                <div class="flex flex-wrap items-center">
-                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                        <h3 class="font-semibold text-base text-gray-700">Book list</h3>
-                    </div>
-                    <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                        <a href="{{ path('create_book') }}" class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-5 py-2.5 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                            Add book
-                        </a>
-                    </div>
-                </div>
+<div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+    <div class="rounded-t mb-0 px-4 py-3 border-0">
+        <div class="flex flex-wrap items-center">
+            <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                <h3 class="font-semibold text-base text-gray-700">Book list</h3>
             </div>
-
-            <div class="block w-full overflow-x-auto">
-                <table class="items-center bg-transparent w-full border-collapse ">
-                    <thead>
-                        <tr>
-                            <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                Title
-                            </th>
-                            <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                Author
-                            </th>
-                            <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                Release Year
-                            </th>
-                            <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                ISBN
-                            </th>
-                            <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for book in books %}
-                            <tr>
-                                <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-gray-700 ">
-                                    {{ book.title }}
-                                </th>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                    {{ book.author }}
-                                </td>
-                                <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    {{ book.releaseYear ? book.releaseYear.format('Y-m-d') : '' }}
-                                </td>
-                                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    {{ book.isbn }}
-                                </td>
-                                <td td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <a href="{{ path('edit_book', {'id': book.id}) }}" class="font-medium text-blue-600 hover:underline mr-4">Edit</a>                 
-                                    <button 
-                                        data-modal-target="popup-modal" 
-                                        data-modal-toggle="popup-modal" 
-                                        id="delete-button"
-                                        class="font-medium text-red-600 hover:underline"
-                                        type="button"
-                                        onclick="getDeleteBookId({{ book.id }})"
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                <a href="{{ path('book_create_action') }}" class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-5 py-2.5 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                    Add book
+                </a>
             </div>
         </div>
+    </div>
+
+    <div class="block w-full overflow-x-auto">
+        <table class="items-center bg-transparent w-full border-collapse ">
+            <thead>
+                <tr>
+                    <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        Title
+                    </th>
+                    <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        Author
+                    </th>
+                    <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        Release Year
+                    </th>
+                    <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        ISBN
+                    </th>
+                    <th class="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-gray-700 ">
+                            {{ book.title }}
+                        </th>
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                            {{ book.author }}
+                        </td>
+                        <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                            {{ book.releaseYear ? book.releaseYear.format('Y-m-d') : '' }}
+                        </td>
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                            {{ book.isbn }}
+                        </td>
+                        <td td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                            <a href="{{ path('book_edit_action', {'id': book.id}) }}" class="font-medium text-blue-600 hover:underline mr-4">Edit</a>                 
+                            <button 
+                                data-modal-target="popup-modal" 
+                                data-modal-toggle="popup-modal" 
+                                id="delete-button"
+                                class="font-medium text-red-600 hover:underline"
+                                type="button"
+                                onclick="getDeleteBookId({{ book.id }})"
+                            >
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative bg-white rounded-lg shadow">
@@ -103,7 +102,7 @@
     function getDeleteBookId(id)
     {
         let confirmLink = document.getElementById('confirm-link');
-        confirmLink.href = '{{ path("delete_book", {"id": "__BOOK_ID__"}) }}'.replace('__BOOK_ID__', id);
+        confirmLink.href = '{{ path("book_delete_action", {"id": "__BOOK_ID__"}) }}'.replace('__BOOK_ID__', id);
     }
 </script>
 {% endblock %}

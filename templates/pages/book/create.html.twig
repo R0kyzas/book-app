@@ -3,38 +3,73 @@
 {% block title %}Create Book{% endblock %}
 
 {% block content %}
+    <div class="mb-4">
+        <a href="{{ path('book_list_action') }}" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">   
+            <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"/>
+            </svg>
+            Back
+        </a>
+    </div>
+    <div class="bg-white shadow rounded px-8 pt-6 pb-8 mb-4">
+        {{ form_start(form) }}
             <div class="mb-4">
-                <a href="{{ path('app_book') }}" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">   
-                    <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"/>
-                    </svg>
-                    Back
-                </a>
-            </div>
-            <div class="bg-white shadow rounded px-8 pt-6 pb-8 mb-4">
-                {{ form_start(form) }}
+                {{ form_label(form.title, 'Title', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+                {{ 
+                    form_widget(form.title, {
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' ~ (form_errors(form.title)|length ? ' border-red-500' : '')
+                        }
+                    }) 
+                }}
+                <div class="text-red-500 text-xs mt-2">
                     {{ form_errors(form.title) }}
-                    <div class="mb-4">
-                        {{ form_label(form.title, 'Title', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
-                        {{ form_widget(form.title, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
-                    </div>
-                    <div class="mb-4">
-                        {{ form_label(form.author, 'Author', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
-                        {{ form_widget(form.author, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
-                    </div>
-                    <div class="mb-4">
-                        {{ form_label(form.releaseYear, 'Release Year', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
-                        {{ form_widget(form.releaseYear, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
-                    </div>
-                    <div class="mb-4">
-                        {{ form_label(form.isbn, 'ISBN', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
-                        {{ form_widget(form.isbn, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
-                    </div>
-                    <div class="flex items-center justify-center">
-                        <button class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                            Add book
-                        </button>
-                    </div>
-                {{ form_end(form) }}
+                </div>
             </div>
+            <div class="mb-4">
+                {{ form_label(form.author, 'Author', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+                {{ 
+                    form_widget(form.author, {
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' ~ (form_errors(form.author)|length ? ' border-red-500' : '')
+                        }
+                    }) 
+                }}
+                <div class="text-red-500 text-xs mt-2">
+                    {{ form_errors(form.author) }}
+                </div>
+            </div>
+            <div class="mb-4">
+                {{ form_label(form.releaseYear, 'Release Year', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+                {{ 
+                    form_widget(form.releaseYear, {
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' ~ (form_errors(form.releaseYear)|length ? ' border-red-500' : '')
+                        }
+                    }) 
+                }}
+                <div class="text-red-500 text-xs mt-2">
+                    {{ form_errors(form.releaseYear) }}
+                </div>
+             </div>
+            <div class="mb-4">
+                {{ form_label(form.isbn, 'ISBN', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+                {{ 
+                    form_widget(form.isbn, {
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' ~ (form_errors(form.isbn)|length ? ' border-red-500' : '')
+                        }
+                    }) 
+                }}
+                <div class="text-red-500 text-xs mt-2">
+                    {{ form_errors(form.isbn) }}
+                </div>
+            </div>
+            <div class="flex items-center justify-center">
+                <button class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Create book
+                </button>
+            </div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

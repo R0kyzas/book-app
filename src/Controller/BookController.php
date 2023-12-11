@@ -12,7 +12,7 @@ use App\Form\BookType;
 class BookController extends AbstractController
 {
     /**
-     * @Route("/book", name="app_book")
+     * @Route("/books", name="book_list_action")
      */
     public function list(): Response
     {
@@ -24,7 +24,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/create", name="create_book")
+     * @Route("/books/create", name="book_create_action")
      */
     public function create(Request $request): Response
     {
@@ -40,7 +40,7 @@ class BookController extends AbstractController
 
             $this->addFlash('success', 'Book added successfully.');
 
-            return $this->redirectToRoute('app_book');
+            return $this->redirectToRoute('book_list_action');
         }
 
         return $this->render('pages/book/create.html.twig', [
@@ -49,10 +49,15 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/edit/{id}", name="edit_book")
+     * @Route("/books/edit/{id}", name="book_edit_action")
      */
     public function edit(Request $request, Book $book): Response
     {
+        if (!$book) {
+            $this->addFlash('error', 'Book not found.');
+            return $this->redirectToRoute('book_list_action');
+        }
+
         $form = $this->createForm(BookType::class, $book);
         
         $form->handleRequest($request);
@@ -63,7 +68,7 @@ class BookController extends AbstractController
 
             $this->addFlash('success', 'Book updated successfully.');
 
-            return $this->redirectToRoute('app_book');
+            return $this->redirectToRoute('book_list_action');
         }else {
             dump($form->getErrors(true, false));
         }
@@ -73,13 +78,13 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/delete/{id}", name="delete_book")
+     * @Route("/books/delete/{id}", name="book_delete_action")
      */
     public function delete(Book $book): Response
     {
         if (!$book) {
             $this->addFlash('error', 'Book not found.');
-            return $this->redirectToRoute('app_book');
+            return $this->redirectToRoute('book_list_action');
         }
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -88,6 +93,6 @@ class BookController extends AbstractController
 
         $this->addFlash('success', 'Book deleted successfully.');
 
-        return $this->redirectToRoute('app_book');
+        return $this->redirectToRoute('book_list_action');
     }
 }

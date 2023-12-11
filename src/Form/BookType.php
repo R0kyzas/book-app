@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
 
 class BookType extends AbstractType
 {
@@ -17,22 +18,27 @@ class BookType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'required' => false,
                 'constraints' => [
                     new NotBlank(),
+                    new Length([
+                        'min' => 3,
+                        'max' => 255,
+                    ]),
                 ],
             ])
             ->add('author', TextType::class, [
-                'required' => true,
-                'attr' => [
-                    'minlength' => 5,
-                    'maxlength' => 255,
-                ],
+                'required' => false,
                 'constraints' => [
                     new NotBlank(),
+                    new Length([
+                        'min' => 5,
+                        'max' => 255,
+                    ]),
                 ],
             ])
             ->add('releaseYear', DateType::class, [
-                'required' => true,
+                'required' => false,
                 'widget' => 'single_text',
                 'input'  => 'datetime',
                 'format' => 'yyyy-MM-dd',
@@ -41,12 +47,13 @@ class BookType extends AbstractType
                 ],
             ])
             ->add('isbn', TextType::class, [
-                'required' => true,
-                'attr' => [
-                    'maxlength' => 20
-                ],
+                'required' => false,
                 'constraints' => [
                     new NotBlank(),
+                    new Length([
+                        'min' => 5,
+                        'max' => 20,
+                    ]),
                 ],
             ])
         ;

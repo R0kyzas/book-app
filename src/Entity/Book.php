@@ -48,7 +48,7 @@ class Book
         return $this->title;
     }
 
-    public function setTitle(string $title): void
+    public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
@@ -58,7 +58,7 @@ class Book
         return $this->author;
     }
 
-    public function setAuthor(string $author): void
+    public function setAuthor(?string $author): void
     {
         $this->author = $author;
     }
@@ -78,7 +78,7 @@ class Book
         return $this->isbn;
     }
 
-    public function setIsbn(string $isbn): void
+    public function setIsbn(?string $isbn): void
     {
         $this->isbn = $isbn;
     }
