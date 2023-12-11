@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
@@ -28,7 +29,7 @@ class Book
     private $author;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="datetime")
      */
     private $releaseYear;
 
@@ -62,12 +63,12 @@ class Book
         $this->author = $author;
     }
 
-    public function getReleaseYear(): ?int
+    public function getReleaseYear(): ?DateTime
     {
         return $this->releaseYear;
     }
 
-    public function setReleaseYear(int $releaseYear): void
+    public function setReleaseYear(?DateTime $releaseYear): void
     {
         $this->releaseYear = $releaseYear;
     }
