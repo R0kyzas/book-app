@@ -1,7 +1,7 @@
 ## How to run locally?
 
 Requirements:
-    Composer, PHP
+    Composer, PHP, Xampp or Wamp
 
 Steps:
 1. Clone repostory
